@@ -1,6 +1,23 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+# 🚀 AI Chat Assistant
+
+An interactive **AI-powered chat assistant** built with **Next.js 14 (App Router)**, **TailwindCSS**, and **Groq API**.  
+Supports both **normal responses** and **real-time streaming responses** using Server-Sent Events (SSE).  
+
+---
+
+## ✨ Features
+- 💡 Chat with an AI assistant (Groq’s LLaMA 3.1 model).
+- ⚡ Real-time streaming responses.
+- 🎨 Modern UI with TailwindCSS.
+- 🔑 Secure API key handling with `.env.local`.
+
+---
+
+## 📂 Project Structure
+
 
 First, run the development server:
 
