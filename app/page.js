@@ -1,12 +1,14 @@
+
 // "use client";
-// import Image from "next/image";
 // import { useState } from "react";
+
+
 // export default function Home() {
 //   const [message, setMessage] = useState("");
 //   const [response, setResponse] = useState("");
-//   const [streaming, setStreaming] = useState("");
-//   const [loading, setLoading] = useState("");
 //   const [streamResponse, setStreamResponse] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const [streaming, setStreaming] = useState(false);
 
 //   const handleChat = async () => {
 //     setLoading(true);
@@ -15,93 +17,108 @@
 //     try {
 //       const res = await fetch("/api/chat", {
 //         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
+//         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ message }),
 //       });
 
-//       if (!res.ok) {
-//         throw new Error("Network response was not ok");
-//       }
+//       if (!res.ok) throw new Error("Network error");
 
 //       const data = await res.json();
 //       setResponse(data.response);
 //     } catch (error) {
 //       console.error("Error:", error);
-//       setResponse("An error occurred while processing your request.");
+//       setResponse("⚠️ Something went wrong. Please try again.");
 //     } finally {
 //       setLoading(false);
 //     }
-
 //   };
 
 //   const handleStreamChat = async () => {
 //     setStreaming(true);
 //     setStreamResponse("");
+
 //     try {
 //       const res = await fetch("/api/chat-stream", {
 //         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
+//         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ message }),
 //       });
+
 //       const reader = res.body.getReader();
 //       const decoder = new TextDecoder();
 
-//       while(true){
-//          const {done, value}=await reader.read();
-//         if(done) break;
-//         const chunk = decoder.decode(value)
-//         const lines = chunk.split("\n")
-//         for(const lines of lines){
-//           if(lines.startsWith("data: ")){
-//             const data=JSON.parse(lines.slice(6))
-//             setStreamResponse((prev)=>prev+data.content)
+//       while (true) {
+//         const { done, value } = await reader.read();
+//         if (done) break;
+//         const chunk = decoder.decode(value);
+//         const lines = chunk.split("\n");
+
+//         for (const line of lines) {
+//           if (line.startsWith("data: ")) {
+//             const data = JSON.parse(line.slice(6));
+//             setStreamResponse((prev) => prev + data.content);
 //           }
 //         }
 //       }
 //     } catch (error) {
 //       console.error("Error:", error);
-//       setStreamResponse("An error occurred while processing your request.");
-      
+//       setStreamResponse("⚠️ Something went wrong while streaming.");
+//     } finally {
+//       setStreaming(false);
 //     }
-//     setLoading(false);
-//   }
+//   };
 
 //   return (
-//     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-//       <h1>Get started Ai </h1>
-//       <div>
-//         <textares
-//           value = {message}
+//     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6">
+      
+//       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8 space-y-6">
+//         <h1 className="text-3xl font-bold text-center text-blue-600">
+//           🚀 AI Chat Assistant
+//         </h1>
+
+//         {/* Input Box */}
+//         <textarea
+//           value={message}
 //           onChange={(e) => setMessage(e.target.value)}
-//           placeholder="Type your message here..."
+//           placeholder="💬 Type your message here..."
 //           rows={4}
-//           className="w-full max-w-md p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+//           className="w-full p-4 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
 //         />
-//       </div>
-//       <div>
-//         <button onClick={handleChat} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >{loading ? "Loading...": "Chat"}</button>
-//         <button onClick={handleStreamChat} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >{loading ? "Loading...": "Stream Chat"}</button>
-//       </div>
-//       <div className="w-full max-w-md p-4 border border-gray-300 rounded-md bg-gray-50 text-gray-800">
-//         {response}
-//       </div>
-//       <div className="w-full max-w-md p-4 border border-gray-300 rounded-md bg-gray-50 text-gray-800">
-//         {streamResponse}
+
+//         {/* Buttons */}
+//         <div className="flex gap-4 justify-center">
+//           <button
+//             onClick={handleChat}
+//             disabled={loading}
+//             className="px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold shadow-md hover:bg-blue-700 disabled:bg-blue-300 transition"
+//           >
+//             {loading ? "⌛ Loading..." : "💡 Chat"}
+//           </button>
+//           <button
+//             onClick={handleStreamChat}
+//             disabled={streaming}
+//             className="px-6 py-2 bg-green-600 text-white rounded-xl font-semibold shadow-md hover:bg-green-700 disabled:bg-green-300 transition"
+//           >
+//             {streaming ? "📡 Streaming..." : "⚡ Stream Chat"}
+//           </button>
+//         </div>
+
+//         {/* Response Section */}
+//         {response && (
+//           <div className="p-4 bg-gray-50 border rounded-xl shadow-inner text-gray-800 whitespace-pre-wrap">
+//             <strong>AI Response:</strong> {response}
+//           </div>
+//         )}
+
+//         {streamResponse && (
+//           <div className="p-4 bg-gray-50 border rounded-xl shadow-inner text-gray-800 whitespace-pre-wrap">
+//             <strong>Streaming Response:</strong> {streamResponse}
+//           </div>
+//         )}
 //       </div>
 //     </div>
 //   );
 // }
-
-
-
-
-
-
-
 
 
 
@@ -175,8 +192,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6">
-      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8 space-y-6">
+    <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
+      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8 space-y-6 backdrop-blur-md bg-opacity-90">
         <h1 className="text-3xl font-bold text-center text-blue-600">
           🚀 AI Chat Assistant
         </h1>
@@ -224,3 +241,4 @@ export default function Home() {
     </div>
   );
 }
+

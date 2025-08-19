@@ -24,3 +24,53 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+/* --- 3D moving orbs background --- */
+.scene-3d {
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+.orb {
+  position: absolute;
+  width: 38vmin;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  background:
+    radial-gradient(35% 35% at 30% 30%, rgba(255,255,255,.7), rgba(255,255,255,0) 70%),
+    radial-gradient(circle, var(--clr, #60a5fa), transparent 60%);
+  filter: saturate(1.2) blur(.2px);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform-style: preserve-3d;
+  animation:
+    orb-float var(--dur, 16s) ease-in-out infinite alternate,
+    orb-spin 40s linear infinite;
+}
+
+@keyframes orb-float {
+  from {
+    transform: translate3d(var(--x0, -25vw), var(--y0, -15vh), var(--z, -200px))
+               scale(var(--s, 1));
+  }
+  to {
+    transform: translate3d(var(--x1, 25vw), var(--y1, 15vh), var(--z, -650px))
+               scale(calc(var(--s, 1) * 1.1));
+  }
+}
+
+@keyframes orb-spin {
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
+}
+
+/* Optional subtle vignette so content pops */
+.bg-vignette::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: radial-gradient(120% 80% at 50% 10%, transparent 40%, rgba(0,0,0,.15) 100%);
+}
