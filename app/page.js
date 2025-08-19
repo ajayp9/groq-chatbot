@@ -1,103 +1,226 @@
-import Image from "next/image";
+// "use client";
+// import Image from "next/image";
+// import { useState } from "react";
+// export default function Home() {
+//   const [message, setMessage] = useState("");
+//   const [response, setResponse] = useState("");
+//   const [streaming, setStreaming] = useState("");
+//   const [loading, setLoading] = useState("");
+//   const [streamResponse, setStreamResponse] = useState("");
+
+//   const handleChat = async () => {
+//     setLoading(true);
+//     setResponse("");
+
+//     try {
+//       const res = await fetch("/api/chat", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ message }),
+//       });
+
+//       if (!res.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+
+//       const data = await res.json();
+//       setResponse(data.response);
+//     } catch (error) {
+//       console.error("Error:", error);
+//       setResponse("An error occurred while processing your request.");
+//     } finally {
+//       setLoading(false);
+//     }
+
+//   };
+
+//   const handleStreamChat = async () => {
+//     setStreaming(true);
+//     setStreamResponse("");
+//     try {
+//       const res = await fetch("/api/chat-stream", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ message }),
+//       });
+//       const reader = res.body.getReader();
+//       const decoder = new TextDecoder();
+
+//       while(true){
+//          const {done, value}=await reader.read();
+//         if(done) break;
+//         const chunk = decoder.decode(value)
+//         const lines = chunk.split("\n")
+//         for(const lines of lines){
+//           if(lines.startsWith("data: ")){
+//             const data=JSON.parse(lines.slice(6))
+//             setStreamResponse((prev)=>prev+data.content)
+//           }
+//         }
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       setStreamResponse("An error occurred while processing your request.");
+      
+//     }
+//     setLoading(false);
+//   }
+
+//   return (
+//     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+//       <h1>Get started Ai </h1>
+//       <div>
+//         <textares
+//           value = {message}
+//           onChange={(e) => setMessage(e.target.value)}
+//           placeholder="Type your message here..."
+//           rows={4}
+//           className="w-full max-w-md p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+//         />
+//       </div>
+//       <div>
+//         <button onClick={handleChat} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >{loading ? "Loading...": "Chat"}</button>
+//         <button onClick={handleStreamChat} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >{loading ? "Loading...": "Stream Chat"}</button>
+//       </div>
+//       <div className="w-full max-w-md p-4 border border-gray-300 rounded-md bg-gray-50 text-gray-800">
+//         {response}
+//       </div>
+//       <div className="w-full max-w-md p-4 border border-gray-300 rounded-md bg-gray-50 text-gray-800">
+//         {streamResponse}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+"use client";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
+  const [streamResponse, setStreamResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [streaming, setStreaming] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleChat = async () => {
+    setLoading(true);
+    setResponse("");
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+
+      if (!res.ok) throw new Error("Network error");
+
+      const data = await res.json();
+      setResponse(data.response);
+    } catch (error) {
+      console.error("Error:", error);
+      setResponse("⚠️ Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleStreamChat = async () => {
+    setStreaming(true);
+    setStreamResponse("");
+
+    try {
+      const res = await fetch("/api/chat-stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n");
+
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = JSON.parse(line.slice(6));
+            setStreamResponse((prev) => prev + data.content);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setStreamResponse("⚠️ Something went wrong while streaming.");
+    } finally {
+      setStreaming(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6">
+      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8 space-y-6">
+        <h1 className="text-3xl font-bold text-center text-blue-600">
+          🚀 AI Chat Assistant
+        </h1>
+
+        {/* Input Box */}
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="💬 Type your message here..."
+          rows={4}
+          className="w-full p-4 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
+        />
+
+        {/* Buttons */}
+        <div className="flex gap-4 justify-center">
+          <button
+            onClick={handleChat}
+            disabled={loading}
+            className="px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold shadow-md hover:bg-blue-700 disabled:bg-blue-300 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            {loading ? "⌛ Loading..." : "💡 Chat"}
+          </button>
+          <button
+            onClick={handleStreamChat}
+            disabled={streaming}
+            className="px-6 py-2 bg-green-600 text-white rounded-xl font-semibold shadow-md hover:bg-green-700 disabled:bg-green-300 transition"
           >
-            Read our docs
-          </a>
+            {streaming ? "📡 Streaming..." : "⚡ Stream Chat"}
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Response Section */}
+        {response && (
+          <div className="p-4 bg-gray-50 border rounded-xl shadow-inner text-gray-800 whitespace-pre-wrap">
+            <strong>AI Response:</strong> {response}
+          </div>
+        )}
+
+        {streamResponse && (
+          <div className="p-4 bg-gray-50 border rounded-xl shadow-inner text-gray-800 whitespace-pre-wrap">
+            <strong>Streaming Response:</strong> {streamResponse}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
