@@ -212,7 +212,7 @@ export default function Home() {
           <button
             onClick={handleChat}
             disabled={loading}
-            className="px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold shadow-md hover:bg-blue-700 disabled:bg-blue-300 transition"
+            className="w-full p-4 bg-white/80 text-gray-800 placeholder-gray-500 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
           >
             {loading ? "⌛ Loading..." : "💡 Chat"}
           </button>
