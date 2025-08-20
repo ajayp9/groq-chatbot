@@ -34,5 +34,11 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 
 ### 1️⃣ Clone the repository  
 ```bash
-git clone https://github.com/your-username/groq-chatbot.git
+git clone https://github.com/ajayp9/groq-chatbot.git
 cd groq-chatbot
+
+## 📷 Screenshots / Demo
+
+### Screenshot
+![App Screenshot](./public/Screen.png)
+
