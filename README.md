@@ -32,20 +32,20 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 git clone https://github.com/your-username/groq-chatbot.git
 cd groq-chatbot
 ---
-### 2️⃣ Install dependencies
+### **2️⃣ Install dependencies**
 npm install
 # or
 yarn install
 # or
 pnpm install
 ---
-### 3️⃣ Add environment variables
+### * 3️⃣ Add environment variables**
 
 Create a .env.local file in the root folder:
 OPENAI_API_KEY=your_openai_api_key
 GROQ_API_KEY=your_groq_api_key
 ---
-### 4️⃣ Run the development server
+### **4️⃣ Run the development server**
 
 npm run dev
 # or
