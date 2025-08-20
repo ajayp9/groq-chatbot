@@ -1,5 +1,10 @@
 # 🚀 AetherChat  
 
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white)](https://nextjs.org/) 
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-blue?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) 
+[![OpenAI](https://img.shields.io/badge/OpenAI-API-red?logo=openai&logoColor=white)](https://platform.openai.com/docs) 
+[![Vercel](https://img.shields.io/badge/Vercel-Deploy-black?logo=vercel&logoColor=white)](https://vercel.com/)  
+
 > **Interactive AI-Powered Chat Assistant** built with **Next.js 14 (App Router)**, **TailwindCSS**, and the **OpenAI API**.  
 Enjoy real-time streaming responses with a sleek animated background and modern UI.  
 
@@ -18,10 +23,10 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 
 ## 📂 Tech Stack  
 
-**Frontend** → Next.js 14, React.js, TailwindCSS  
-**Backend / API** → Next.js API Routes, OpenAI SDK  
-**Animations** → Framer Motion / HTML Canvas  
-**Hosting** → Vercel  
+- **Frontend:** Next.js 14, React.js, TailwindCSS  
+- **Backend / API:** Next.js API Routes, OpenAI SDK  
+- **Animations:** Framer Motion / HTML Canvas  
+- **Hosting:** Vercel  
 
 ---
 
@@ -31,32 +36,3 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 ```bash
 git clone https://github.com/your-username/groq-chatbot.git
 cd groq-chatbot
----
-### **2️⃣ Install dependencies**
-npm install
-# or
-yarn install
-# or
-pnpm install
----
-### * 3️⃣ Add environment variables**
-
-Create a .env.local file in the root folder:
-OPENAI_API_KEY=your_openai_api_key
-GROQ_API_KEY=your_groq_api_key
----
-### **4️⃣ Run the development server**
-
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-
----
-## 📷 Screenshots / Demo
-
-Add screenshots or GIFs of your app here to showcase the UI and animations:
-
-![App Screenshot](./public/Screen.png)
-
