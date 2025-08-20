@@ -36,24 +36,25 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 ```bash
 git clone https://github.com/ajayp9/groq-chatbot.git
 cd groq-chatbot
-Install dependencies
 
+### 2️⃣ Install dependencies
+```bash
 npm install
 # or
 yarn install
 # or
 pnpm install
 
-
-Add your environment variables
+### 3️⃣ Add environment variables
+```bash
 Create a .env.local file:
 
 OPENAI_API_KEY=your_openai_api_key
 GROQ_API_KEY=your_groq_api_key
 
 
-Run the development server
-
+### 4️⃣ Run the development server
+```bash
 npm run dev
 # or
 yarn dev
@@ -64,7 +65,7 @@ pnpm dev
 Open http://localhost:3000
  to view your app.
 
-⚡ Scripts
+## ⚡ Scripts
 
 npm run dev → Start development server
 
@@ -72,7 +73,7 @@ npm run build → Build production-ready app
 
 npm run start → Start production server
 
-🎨 Deployment
+## 🎨 Deployment
 
 Easily deploy to Vercel:
 
@@ -82,12 +83,12 @@ Set the environment variables in Vercel.
 
 Deploy your project.
 
-📷 Screenshots / Demo
+## 📷 Screenshots / Demo
 
 Add screenshots or GIFs of your app here to showcase the UI and animations.
 ![App Screenshot](./public/Screen.png)
 
-📖 Learn More
+## 📖 Learn More
 
 Next.js Documentation
 
@@ -95,7 +96,7 @@ TailwindCSS Documentation
 
 OpenAI API Documentation
 
-🤝 Contributing
+## 🤝 Contributing
 
 Feel free to submit issues, feature requests, or pull requests!
 
