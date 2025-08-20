@@ -54,7 +54,9 @@ yarn dev
 pnpm dev
 
 ---
-# 📷 Screenshots / Demo
+## 📷 Screenshots / Demo
 
-Add screenshots or GIFs of your app here to showcase the UI and animations.
+Add screenshots or GIFs of your app here to showcase the UI and animations:
+
 ![App Screenshot](./public/Screen.png)
+
