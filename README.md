@@ -37,8 +37,8 @@
 git clone https://github.com/ajayp9/groq-chatbot.git
 cd groq-chatbot
 
+<h3 style="font-weight: 800; color: black;">2️⃣ Install dependencies</h3>
 
-### 2️⃣ Install dependencies
 ```bash
 npm install
 # or
