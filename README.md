@@ -38,9 +38,8 @@ git clone https://github.com/ajayp9/groq-chatbot.git
 cd groq-chatbot
 
 
-<h3 style="font-weight: 800; color: black;">2️⃣ Install dependencies</h3>
+### 2️⃣ **Install dependencies**
 
-```bash
 npm install
 # or
 yarn install
@@ -49,7 +48,7 @@ pnpm install
 
 
 ### 3️⃣ Add environment variables
-```bash
+
 Create a .env.local file:
 
 OPENAI_API_KEY=your_openai_api_key
@@ -57,14 +56,14 @@ GROQ_API_KEY=your_groq_api_key
 
 
 ### 4️⃣ Run the development server
-```bash
+
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
 
-
+--
 Open http://localhost:3000
  to view your app.
 
@@ -75,7 +74,7 @@ npm run dev → Start development server
 npm run build → Build production-ready app
 
 npm run start → Start production server
-
+--
 ## 🎨 Deployment
 
 Easily deploy to Vercel:
