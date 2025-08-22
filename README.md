@@ -6,7 +6,7 @@
 [![Vercel](https://img.shields.io/badge/Vercel-Deploy-black?logo=vercel&logoColor=white)](https://vercel.com/)  
 
 > **Interactive AI-Powered Chat Assistant** built with **Next.js 14 (App Router)**, **TailwindCSS**, and the **OpenAI API**.  
-Enjoy real-time streaming responses with a sleek animated background and modern UI.  
+> Enjoy real-time streaming responses with a sleek animated background and modern UI.  
 
 ---
 
@@ -36,6 +36,7 @@ Enjoy real-time streaming responses with a sleek animated background and modern 
 ```bash
 git clone https://github.com/ajayp9/groq-chatbot.git
 cd groq-chatbot
+
 
 ### 2️⃣ Install dependencies
 ```bash
